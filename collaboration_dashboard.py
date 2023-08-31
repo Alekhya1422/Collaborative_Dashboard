@@ -44,7 +44,7 @@ def validateUserID():
 # Adding container to group Input elements
 with st.container():
     # Input fields
-    st.text_input(label="Your preferred User ID", value="",on_change=validateUserID, key='userId'))
+    st.text_input(label="Your preferred User ID", value="",on_change=validateUserID, key='userId')
     # st.session_state.userId is what needs to be validated
     userName = st.text_input("Your Full Name", "")
     userEmail = st.text_input("Your E-mail","")
