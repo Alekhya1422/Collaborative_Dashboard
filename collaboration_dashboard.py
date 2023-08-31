@@ -92,6 +92,13 @@ with st.container():
 
 # Submit button
 if st.button("Submit"):
+    
+    # test snowfleake conn
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_cnx.close()
+
+    st.write(Snowlflake conection worked!!!!)   
+        
     if st.session_state.userId and userName and objective and selectedObjectives:
         
         for obj in selectedObjectives:
@@ -112,13 +119,3 @@ with st.expander("People with similar learning objectives"):
     with st.spinner('Performing associate matching...'):
         time.sleep(10)
     st.success('Sorry, no associates have been matched to your learning objectives')
-
-# Adding new container for debug (to be removed)
-with st.container():    
-
-    st.write('You selected:', technology)
-    
-    if st.session_state.ideasList:
-        st.title("Ideas")
-        for idea in st.session_state.ideasList:
-            st.write(idea)
