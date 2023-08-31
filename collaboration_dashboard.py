@@ -1,3 +1,4 @@
+import time
 import streamlit as st
 
 # FMR logo on top - will adjust the align later
