@@ -19,8 +19,8 @@ if 'userId' not in st.session_state:
 
 # Test data (to be removed once we connect to Snowflake)
 learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau']
-certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Crtified Associate']
-projectList = ['AngularJS web application', 'Android mobile app'']
+certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Certified Associate']
+projectList = ['AngularJS web application', 'Android mobile app']
 
 #lists
 objectiveList = []
@@ -36,10 +36,10 @@ def validateUserID():
   return True 
 
 # Allow the end user to insert a new objective
-def insert_row_snowflake(new_fruit):
-  with  my_cnx.cursor() as my_cur:
-    my_cur.execute("insert into fruit_load_list values ('" + new_fruit + "')")
-    return "Thanks for adding " + new_fruit   
+#def insert_row_snowflake(new_fruit):
+  #with  my_cnx.cursor() as my_cur:
+   # my_cur.execute("insert into fruit_load_list values ('" + new_fruit + "')")
+   # return "Thanks for adding " + new_fruit   
 
 # Adding container to group Input elements
 with st.container():
