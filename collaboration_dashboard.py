@@ -97,7 +97,7 @@ if st.button("Submit"):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_cnx.close()
 
-    st.write(Snowlflake conection worked!!!!)   
+    st.write('Snowlflake conection worked!!!!')   
         
     if st.session_state.userId and userName and objective and selectedObjectives:
         
