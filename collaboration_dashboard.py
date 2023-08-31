@@ -74,9 +74,10 @@ with st.container():
 
     extraLearningObjectives = st.text_area("Please provide additional input on your Learning Day objectives", "")
 
-    selectedObjectives = st.multiselect(
-        label='Select any specific item you are interested in as per your learning interests (you can select multiple items): ',
-        default=objectiveList)
+    for i in objectiveList:
+        st.write(i)    
+    
+    selectedObjectives = st.multiselect("Select any specific item you are interested in as per your learning interests (you can select multiple items): ", objectiveList)
 
     if "Submit New Objective" in selectedObjectives:
         # Allow users to enter a new learning objective that is not present in the list
