@@ -17,6 +17,9 @@ if "ideasList" not in st.session_state:
 if 'userId' not in st.session_state:
     st.session_state.userId = ''
 
+if 'validateUderID' not in st.session_state:
+    st.session_state.validateUderID = ''
+
 # Test data (to be removed once we connect to Snowflake)
 learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau']
 certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Certified Associate']
@@ -30,9 +33,9 @@ def validateUserID():
   # This will check in Snowflake if the user already exists (with a select count to check if exists)
   # Will return True or False based on st.session_state.userId
   if 1 == 1:
-      st.caption(':heavy_check_mark: Username ' + st.session_state.userId + ' is available')
+      st.session_state.validateUderID =':heavy_check_mark: Username ' + st.session_state.userId + ' is available'
   else:
-      st.caption(':x: Username ' + st.session_state.userId + ' is not available. Please enter a new one.')
+      st.session_state.validateUderID =':x: Username ' + st.session_state.userId + ' is not available. Please enter a new one.'
   return True 
 
 # Allow the end user to insert a new objective
@@ -45,6 +48,7 @@ def validateUserID():
 with st.container():
     # Input fields
     st.text_input(label="Your preferred User ID", value="",on_change=validateUserID, key='userId')
+    st.caption(st.session_state.validateUderID)
     # st.session_state.userId is what needs to be validated
     userName = st.text_input("Your Full Name", "")
     userEmail = st.text_input("Your E-mail","")
