@@ -29,7 +29,7 @@ finalListObjs = []
 def validateUserID():
   # This will check in Snowflake if the user already exists (with a select count to check if exists)
   # Will return True or False based on st.session_state.userId
-  if 1 = 1:
+  if 1 == 1:
       st.caption(':heavy_check_mark: Username ' + st.session_state.userId + ' is available')
   else:
       st.caption(':x: Username ' + st.session_state.userId + ' is not available. Please enter a new one.')
