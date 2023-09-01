@@ -22,14 +22,14 @@ if 'validateUderID' not in st.session_state:
     st.session_state.validateUderID = ''
 
 if 'objectiveCategory' not in st.session_state:
-    st.session_state.objectiveCategory = ''
+    st.session_state.objectiveCategory = 'Learning :open_book:'
 
 # Test data (to be removed once we connect to Snowflake)
 learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau']
 certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Certified Associate']
 projectList = ['AngularJS web application', 'Android mobile app']
 
-objectiveList = []
+objectiveList = learningList.copy()
 finalListObjs = []
 
 def validateUserID():
