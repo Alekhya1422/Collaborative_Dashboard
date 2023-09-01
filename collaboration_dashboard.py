@@ -21,10 +21,16 @@ if 'userId' not in st.session_state:
 if 'validateUderID' not in st.session_state:
     st.session_state.validateUderID = ''
 
+if 'objectiveCategory' not in st.session_state:
+    st.session_state.objectiveCategory = ''
+
 # Test data (to be removed once we connect to Snowflake)
 learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau']
 certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Certified Associate']
 projectList = ['AngularJS web application', 'Android mobile app']
+
+objectiveList = []
+finalListObjs = []
 
 def validateUserID():
   # This will check in Snowflake if the user already exists (with a select count to check if exists)
@@ -34,6 +40,26 @@ def validateUserID():
   else:
       st.session_state.validateUderID =':x: Username ' + st.session_state.userId + ' is not available. Please enter a new one.'
   return True 
+
+def objectiveCatSelected():
+    if st.session_state.objectiveCategory == 'Learning :open_book:':
+        objectiveList = learningList.copy()
+        objectiveList.append('Submit New Objective')
+        st.write('You selected Learning.')
+        for i in objectiveList:
+            st.write(i)
+    elif st.session_state.objectiveCategory == 'Certification :medal:':
+        objectiveList = certificationList.copy()
+        objectiveList.append('Submit New Objective')
+        st.write('You selected Certification.')
+        for i in objectiveList:
+            st.write(i)
+    else:
+        objectiveList = projectList.copy()
+        objectiveList.append('Submit New Objective')
+        st.write('You selected Build a project.')
+        for i in objectiveList:
+            st.write(i) 
 
 # Allow the end user to insert a new objective
 #def insert_row_snowflake(new_fruit):
@@ -52,26 +78,7 @@ with st.container():
     
     objective = st.radio(
     "What are you interested in achieving during Learning Days?",
-    ["Learning :open_book:", "Certification :medal:", "Building a project :desktop_computer:"])
-
-    if objective == 'Learning :open_book:':
-        objectiveList = learningList.copy()
-        objectiveList.append('Submit New Objective')
-        st.write('You selected Learning.')
-        for i in objectiveList:
-            st.write(i)
-    elif objective == 'Certification :medal:':
-        objectiveList = certificationList.copy()
-        objectiveList.append('Submit New Objective')
-        st.write('You selected Certification.')
-        for i in objectiveList:
-            st.write(i)
-    else:
-        objectiveList = projectList.copy()
-        objectiveList.append('Submit New Objective')
-        st.write('You selected Build a project.')
-        for i in objectiveList:
-            st.write(i) 
+    ["Learning :open_book:", "Certification :medal:", "Building a project :desktop_computer:"],on_change=objectiveCatSelected, key='objectiveCategory')
     
     selectedObjectives = st.multiselect("Select any specific item you are interested in as per your learning interests (you can select multiple items): ", objectiveList)
 
