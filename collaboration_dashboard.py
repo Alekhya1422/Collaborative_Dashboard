@@ -26,6 +26,15 @@ learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau']
 certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Certified Associate']
 projectList = ['AngularJS web application', 'Android mobile app']
 
+for i in learningList:
+        st.write(i) 
+
+for i in certificationList:
+        st.write(i) 
+
+for i in projectList:
+        st.write(i) 
+
 #lists
 objectiveList = []
 finalListObjs = []
@@ -73,12 +82,12 @@ with st.container():
                 objectiveList.append('Submit New Objective')
                 #st.write('You selected Build a project.')
 
-    extraLearningObjectives = st.text_area("Please provide additional input on your Learning Day objectives", "")
-
     for i in objectiveList:
         st.write(i)    
     
     selectedObjectives = st.multiselect("Select any specific item you are interested in as per your learning interests (you can select multiple items): ", objectiveList)
+
+    extraLearningObjectives = st.text_area("Please provide additional input on your Learning Day objectives", "")
 
     if "Submit New Objective" in selectedObjectives:
         # Allow users to enter a new learning objective that is not present in the list
