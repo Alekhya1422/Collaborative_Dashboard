@@ -26,19 +26,6 @@ learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle','PowerBI', 'Tableau']
 certificationList = ['AWS Certified Architect Associate', 'Snowflake SnowPro Core', 'AWS Certified Cloud Practitioner', 'Oracle PL/SQL Developer Certified Associate']
 projectList = ['AngularJS web application', 'Android mobile app']
 
-for i in learningList:
-        st.write(i) 
-
-for i in certificationList:
-        st.write(i) 
-
-for i in projectList:
-        st.write(i) 
-
-#lists
-objectiveList = []
-finalListObjs = []
-
 def validateUserID():
   # This will check in Snowflake if the user already exists (with a select count to check if exists)
   # Will return True or False based on st.session_state.userId
@@ -67,23 +54,24 @@ with st.container():
     "What are you interested in achieving during Learning Days?",
     ["Learning :open_book:", "Certification :medal:", "Building a project :desktop_computer:"])
 
-    if objective == 'Learning:open_book:':
+    if objective == 'Learning :open_book:':
         objectiveList = learningList.copy()
         objectiveList.append('Submit New Objective')
-        #st.write('You selected Learning.')
+        st.write('You selected Learning.')
+        for i in objectiveList:
+            st.write(i)
+    elif objective == 'Certification :medal:':
+        objectiveList = certificationList.copy()
+        objectiveList.append('Submit New Objective')
+        st.write('You selected Certification.')
+        for i in objectiveList:
+            st.write(i)
     else:
-        if objective == 'Certification:medal:':
-            objectiveList = certificationList.copy()
-            objectiveList.append('Submit New Objective')
-            #st.write('You selected Certification.')
-        else:
-            if objective == 'Building a project:desktop_computer:':
-                objectiveList = projectList.copy()
-                objectiveList.append('Submit New Objective')
-                #st.write('You selected Build a project.')
-
-    for i in objectiveList:
-        st.write(i)    
+        objectiveList = projectList.copy()
+        objectiveList.append('Submit New Objective')
+        st.write('You selected Build a project.')
+        for i in objectiveList:
+            st.write(i) 
     
     selectedObjectives = st.multiselect("Select any specific item you are interested in as per your learning interests (you can select multiple items): ", objectiveList)
 
