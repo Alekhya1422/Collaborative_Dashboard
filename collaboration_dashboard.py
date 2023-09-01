@@ -46,20 +46,20 @@ def objectiveCatSelected():
         objectiveList = learningList.copy()
         objectiveList.append('Submit New Objective')
         st.write('You selected Learning.')
-        for i in objectiveList:
-            st.write(i)
+        #for i in objectiveList:
+            #st.write(i)
     elif st.session_state.objectiveCategory == 'Certification :medal:':
         objectiveList = certificationList.copy()
         objectiveList.append('Submit New Objective')
         st.write('You selected Certification.')
-        for i in objectiveList:
-            st.write(i)
+        #for i in objectiveList:
+            #st.write(i)
     else:
         objectiveList = projectList.copy()
         objectiveList.append('Submit New Objective')
         st.write('You selected Build a project.')
-        for i in objectiveList:
-            st.write(i) 
+        #for i in objectiveList:
+            #st.write(i) 
 
 # Allow the end user to insert a new objective
 #def insert_row_snowflake(new_fruit):
