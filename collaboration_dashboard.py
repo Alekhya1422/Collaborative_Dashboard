@@ -59,17 +59,17 @@ with st.container():
     ["Learning :open_book:", "Certification :medal:", "Building a project :desktop_computer:"])
 
     if objective == 'Learning:open_book:':
-        objectiveList = learningList
+        objectiveList = learningList.copy()
         objectiveList.append('Submit New Objective')
         #st.write('You selected Learning.')
     else:
         if objective == 'Certification:medal:':
-            objectiveList = certificationList
+            objectiveList = certificationList.copy()
             objectiveList.append('Submit New Objective')
             #st.write('You selected Certification.')
         else:
             if objective == 'Building a project:desktop_computer:':
-                objectiveList = projectList
+                objectiveList = projectList.copy()
                 objectiveList.append('Submit New Objective')
                 #st.write('You selected Build a project.')
 
