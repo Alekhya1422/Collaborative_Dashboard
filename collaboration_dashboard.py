@@ -1,4 +1,11 @@
 import streamlit as st
+import time
+import json
+
+# Open and read the JSON file
+with open('users.json', 'r') as json_file:
+    users = json.load(json_file)
+
 
 # Session data
 if 'validateUserID' not in st.session_state:
@@ -17,6 +24,8 @@ if 'newIdea' not in st.session_state:
     st.session_state.newIdea = ''
 if 'newCertIdea' not in st.session_state:
     st.session_state.newCertIdea = ''
+if 'newBuildIdea' not in st.session_state:
+    st.session_state.newBuildIdea = ''
 
 # Test data (to be removed once we connect to Snowflake)
 learningList = ['PL/SQL', 'Snowflake', 'AWS', 'Oracle', 'PowerBI', 'Tableau']
@@ -37,13 +46,16 @@ def validateUserID():
 
 # Function to add an idea to the list
 def addIdea():
-    st.session_state.ideas.append(st.session_state.newIdea)
+    if st.session_state.newIdea != "":
+        st.session_state.ideas.append(st.session_state.newIdea)
 
 def addCertIdea():
-    st.session_state.ideas.append(st.session_state.newCertIdea)
+    if st.session_state.newCertIdea != "":
+        st.session_state.ideas.append(st.session_state.newCertIdea)
 
-def addBuildIdea(idea):
-    st.session_state.ideas.append(t.session_state.newBuildIdea)
+def addBuildIdea():
+    if st.session_state.newBuildIdea != "":
+        st.session_state.ideas.append(st.session_state.newBuildIdea)
 
 with st.container():
     # FMR logo on top - will adjust the align later
@@ -74,7 +86,7 @@ with st.container():
         # Create a checkbox to add a new learning idea
         add_new_idea = st.checkbox("Add New Learning Idea")
         if add_new_idea:
-            st.text_input("Your Idea", on_change=addIdea, key='newIdea')
+            st.text_input("Your Idea", on_change=addIdea(), key='newIdea')
     elif selected_radio == "Certification :medal:":
         st.session_state.selected_options_2 = st.multiselect("Choose Certification:", certificationList,
                                                              st.session_state.selected_options_2)
@@ -86,16 +98,17 @@ with st.container():
         st.session_state.selected_options_3 = st.multiselect("Choose project type to Build:", projectList,
                                                              st.session_state.selected_options_3)
         # Create a checkbox to add a new project 
-        add_new_idea = st.checkbox("Add New Certification Idea")
+        add_new_idea = st.checkbox("Add New build Idea")
         if add_new_idea:
-            st.text_input("Your Certification Idea", on_change=addBuildIdea(), key='newBuildIdea')
+            st.text_input("Your build Idea", on_change=addBuildIdea(), key='newBuildIdea')
 
 # Combine selected options from all radio buttons
-all_selected_options = (
-        st.session_state.ideas +
+all_selected_options = (        
         st.session_state.selected_options_1 +
         st.session_state.selected_options_2 +
-        st.session_state.selected_options_3)
+        st.session_state.selected_options_3 +
+        st.session_state.ideas)
+
 
 # Display the selected options for all the radio buttons
 st.divider()
@@ -103,3 +116,20 @@ if len(all_selected_options) > 0:
     st.write("You have selected:")
 for option in all_selected_options:
     st.write(option)
+
+with st.expander('People with Similar Interests:'):
+    with st.spinner('Performing associate matching...'):
+        time.sleep(4)
+        for option in all_selected_options:
+            st.markdown(f'## {option}')
+            time.sleep(2)
+            found = False
+            for user in users:
+                if option in user['Interests']:
+                    found = True
+                    st.write(user['Username'],' ',user['Email'])
+                    time.sleep(0.5)
+            if not found:
+                st.success('Sorry, no associates have been matched to your learning objectives')
+
+            st.divider()
